@@ -16,7 +16,8 @@ type FormValues = {
     twitter: string,
     facebook: string,
     instagram: string
-  }
+  },
+  phoneNumbers: string[]
 }
 
 const YoutubeForm = () => {
@@ -43,9 +44,10 @@ const YoutubeForm = () => {
       social: {
         twitter: '',
         facebook: '',
-        instagram: ''
-      }
-    }
+        instagram: '',
+      },
+      phoneNumbers: ['', ''],
+    },
   });
 
   const { register, control, handleSubmit, formState } = form;
@@ -122,6 +124,23 @@ const YoutubeForm = () => {
             <input type="text" id="instagram" {...register('social.instagram')} />
             <p className='text-red-500 text-sm'>{errors.channel?.message}</p>
           </div>
+        </div>
+
+        <div className='space-y-2'>
+          <label htmlFor="primary-phone">Primary Phone Number</label>
+          <input type="text" id="primary-phone" {...register('phoneNumbers.0', {
+            required: {
+              value: true,
+              message: 'Primary PHone Number is require'
+            }
+          })} />
+          <p className='text-red-500 text-sm'>{errors.channel?.message}</p>
+
+        </div>
+
+        <div className='space-y-2'>
+          <label htmlFor="secondary-phone">Secondary Phone Number</label>
+          <input type="text" id="secondary-phone" {...register('phoneNumbers.1')} />
         </div>
 
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' type="submit">Submit</button>
